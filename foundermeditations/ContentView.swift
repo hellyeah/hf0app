@@ -47,6 +47,17 @@ struct ContentView: View {
                 .background(Color.black)
                 .ignoresSafeArea(edges: [.top, .horizontal])
             
+            // Scrollable Audio Tiles
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    ForEach(0..<10) { index in
+                        AudioTileView(title: "Audio \(index + 1)")
+                    }
+                }
+                .padding()
+            }
+            .background(Color.black)
+            
             Spacer()
                 .frame(maxHeight: .infinity)
                 .background(Color.black)
@@ -103,6 +114,24 @@ struct GIFView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIImageView, context: Context) {
         uiView.frame.size = size
+    }
+}
+
+// Audio Tile View Component
+struct AudioTileView: View {
+    let title: String
+    
+    var body: some View {
+        VStack {
+            Rectangle()
+                .fill(Color.gray)
+                .frame(width: 100, height: 100)
+                .cornerRadius(8)
+            
+            Text(title)
+                .foregroundColor(.white)
+                .font(.caption)
+        }
     }
 }
 

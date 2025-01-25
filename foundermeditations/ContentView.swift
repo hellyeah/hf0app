@@ -7,8 +7,10 @@
 
 import SwiftUI
 import SwiftyGif
+import AVFoundation
 
 struct ContentView: View {
+    @State private var audioPlayer: AVAudioPlayer?
 
     
     struct AnimatedGifView: UIViewRepresentable {
@@ -31,18 +33,42 @@ struct ContentView: View {
 //        Circle()
 //            .fill(.blue)
 //            .padding()
-        GIFView(gifName: "spinny.gif")
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        //bring this back in after we test audio file playing
+//        GIFView(gifName: "spinny.gif")
+//        VStack {
+//            Image(systemName: "globe")
+//                .imageScale(.large)
+//                .foregroundStyle(.tint)
+//            Text("Hello, world!")
+//        }
+//        .padding()
+        
+        Button("Play Audio") {
+            playAudio()
         }
-        .padding()
+        .onAppear {
+            setupAudioPlayer()
+        }
+    }
+    
+    
+    private func setupAudioPlayer() {
+        guard let soundURL = Bundle.main.url(forResource: "tenbreath", withExtension: "mp3") else {
+            print("Audio file not found")
+            return
+        }
         
-        
-
-        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.prepareToPlay()
+        } catch {
+            print("Error setting up audio player: \(error.localizedDescription)")
+        }
+    }
+    
+    private func playAudio() {
+        audioPlayer?.play()
     }
 }
 

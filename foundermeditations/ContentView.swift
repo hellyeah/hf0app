@@ -11,7 +11,7 @@ import AVFoundation
 
 struct ContentView: View {
     @State private var audioPlayer: AVAudioPlayer?
-
+    @State private var gifSize = CGSize(width: 100, height: 100)
     
     struct AnimatedGifView: UIViewRepresentable {
         @Binding var url: URL
@@ -35,21 +35,24 @@ struct ContentView: View {
 //            .padding()
         
         //bring this back in after we test audio file playing
-//        GIFView(gifName: "spinny.gif")
-//        VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundStyle(.tint)
+        //GIFView(gifName: "spinny.gif")
+        GIFView(gifName: "spinny.gif", size: $gifSize)
+            .frame(width: gifSize.width, height: gifSize.height)
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.small)
+                .foregroundStyle(.tint)
 //            Text("Hello, world!")
-//        }
-//        .padding()
+            Button("Play Audio") {
+                playAudio()
+            }
+            .onAppear {
+                setupAudioPlayer()
+            }
+        }
+        .padding()
+
         
-        Button("Play Audio") {
-            playAudio()
-        }
-        .onAppear {
-            setupAudioPlayer()
-        }
     }
     
     
@@ -74,6 +77,7 @@ struct ContentView: View {
 
 struct GIFView: UIViewRepresentable {
     let gifName: String
+    @Binding var size: CGSize
     
     func makeUIView(context: Context) -> UIImageView {
         guard let gif = try? UIImage(gifName: gifName) else {
@@ -84,7 +88,9 @@ struct GIFView: UIViewRepresentable {
         return imageView
     }
     
-    func updateUIView(_ uiView: UIImageView, context: Context) {}
+    func updateUIView(_ uiView: UIImageView, context: Context) {
+        uiView.frame.size = size
+    }
 }
 
 

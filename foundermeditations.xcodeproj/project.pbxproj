@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9F8BBF1D2D4008C200A4E3FC /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 9F8BBF1C2D4008C200A4E3FC /* SwiftyGif */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		9F8BBEFF2D40075900A4E3FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F8BBF1D2D4008C200A4E3FC /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = foundermeditations;
 			packageProductDependencies = (
+				9F8BBF1C2D4008C200A4E3FC /* SwiftyGif */,
 			);
 			productName = foundermeditations;
 			productReference = 9F8BBEEE2D40075800A4E3FC /* foundermeditations.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 9F8BBEE52D40075800A4E3FC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9F8BBF1B2D40089A00A4E3FC /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9F8BBEEF2D40075800A4E3FC /* Products */;
 			projectDirPath = "";
@@ -552,6 +561,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9F8BBF1B2D40089A00A4E3FC /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9F8BBF1C2D4008C200A4E3FC /* SwiftyGif */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F8BBF1B2D40089A00A4E3FC /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9F8BBEE62D40075800A4E3FC /* Project object */;
 }

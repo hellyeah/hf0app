@@ -51,7 +51,9 @@ struct ContentView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(0..<10) { index in
-                        AudioTileView(title: "Audio \(index + 1)")
+                        AudioTileView(title: "Audio \(index + 1)", action: {
+                            playAudio(fileName: "audio\(index + 1)")
+                        })
                     }
                 }
                 .padding()
@@ -67,7 +69,7 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
 //            Text("Hello, world!")
             Button("Play Audio") {
-                playAudio()
+                //playAudio()
             }
             .onAppear {
                 setupAudioPlayer()
@@ -94,8 +96,20 @@ struct ContentView: View {
         }
     }
     
-    private func playAudio() {
-        audioPlayer?.play()
+    private func playAudio(fileName: String) {
+        guard let soundURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
+            print("Audio file not found")
+            return
+        }
+        
+        do {
+            audioPlayer?.stop() // Stop any currently playing audio
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            print("Error playing audio: \(error.localizedDescription)")
+        }
     }
 }
 
@@ -120,17 +134,20 @@ struct GIFView: UIViewRepresentable {
 // Audio Tile View Component
 struct AudioTileView: View {
     let title: String
+    let action: () -> Void
     
     var body: some View {
-        VStack {
-            Rectangle()
-                .fill(Color.gray)
-                .frame(width: 100, height: 100)
-                .cornerRadius(8)
-            
-            Text(title)
-                .foregroundColor(.white)
-                .font(.caption)
+        Button(action: action) {
+            VStack {
+                Rectangle()
+                    .fill(Color.gray)
+                    .frame(width: 100, height: 100)
+                    .cornerRadius(8)
+                
+                Text(title)
+                    .foregroundColor(.white)
+                    .font(.caption)
+            }
         }
     }
 }

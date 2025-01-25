@@ -43,6 +43,10 @@ struct ContentView: View {
             .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
             .ignoresSafeArea(edges: .top)
             
+            //this is just a temporary bandaid to push the gif down from the top
+            Spacer()
+            Spacer()
+            
             GIFView(gifName: "spinny.gif", size: $gifSize)
                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.5)
                 .background(Color.black)
@@ -62,34 +66,33 @@ struct ContentView: View {
             .background(Color.black)
             
             Spacer()
-                .frame(maxHeight: .infinity)
-                .background(Color.black)
-            
-//            Image(systemName: "globe")
-//                .imageScale(.small)
-//                .foregroundStyle(.tint)
-//            Text("Hello, world!")
-//            Button("Play Audio") {
-//                //playAudio()
-//            }
-            Button(action: {
-                if isPlaying {
-                    audioPlayer?.pause()
-                } else {
-                    audioPlayer?.play()
+            Spacer()
+
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.black.opacity(0.8), Color.black]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                
+                Button(action: {
+                    if isPlaying {
+                        audioPlayer?.pause()
+                    } else {
+                        audioPlayer?.play()
+                    }
+                    isPlaying.toggle()
+                }) {
+                    Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                        .font(.system(size: 44))
+                        .foregroundColor(.white)
                 }
-                isPlaying.toggle()
-            }) {
-                Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                    .font(.system(size: 44))
-                    .foregroundColor(.blue)
+                .padding(.bottom, 50) // Adjust this value to move button higher
             }
-            .onAppear {
-                setupAudioPlayer()
-            }
-            .padding(.bottom, 30)
+            .frame(height: UIScreen.main.bounds.height * 0.2) // Increase gradient height
         }
-//        .padding()
+        .background(Color.black)
+        .ignoresSafeArea()
 
         
     }
@@ -156,15 +159,18 @@ struct AudioTileView: View {
     var body: some View {
         Button(action: action) {
             VStack {
-                GIFView(gifName: "spinny.gif", size: $gifSize)
+                GIFView(gifName: "spinny", size:$gifSize)
                     .frame(width: 100, height: 100)
                     .cornerRadius(8)
+                    .shadow(color: .white.opacity(0.2), radius: 5)
                 
                 Text(title)
                     .foregroundColor(.white)
                     .font(.caption)
             }
         }
+        .scaleEffect(0.95)
+        .animation(.spring(), value: true)
     }
 }
 

@@ -12,6 +12,7 @@ import AVFoundation
 struct ContentView: View {
     @State private var audioPlayer: AVAudioPlayer?
     @State private var gifSize = CGSize(width: 100, height: 100)
+    @State private var isPlaying = false
     
     struct AnimatedGifView: UIViewRepresentable {
         @Binding var url: URL
@@ -64,12 +65,24 @@ struct ContentView: View {
                 .frame(maxHeight: .infinity)
                 .background(Color.black)
             
-            Image(systemName: "globe")
-                .imageScale(.small)
-                .foregroundStyle(.tint)
+//            Image(systemName: "globe")
+//                .imageScale(.small)
+//                .foregroundStyle(.tint)
 //            Text("Hello, world!")
-            Button("Play Audio") {
-                //playAudio()
+//            Button("Play Audio") {
+//                //playAudio()
+//            }
+            Button(action: {
+                if isPlaying {
+                    audioPlayer?.pause()
+                } else {
+                    audioPlayer?.play()
+                }
+                isPlaying.toggle()
+            }) {
+                Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                    .font(.system(size: 44))
+                    .foregroundColor(.blue)
             }
             .onAppear {
                 setupAudioPlayer()
@@ -97,6 +110,9 @@ struct ContentView: View {
     }
     
     private func playAudio(fileName: String) {
+        // Your existing audio setup code
+        isPlaying = true
+        
         guard let soundURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
             print("Audio file not found")
             return

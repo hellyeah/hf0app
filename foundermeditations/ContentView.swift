@@ -36,9 +36,21 @@ struct ContentView: View {
         
         //bring this back in after we test audio file playing
         //GIFView(gifName: "spinny.gif")
-        GIFView(gifName: "spinny.gif", size: $gifSize)
-            .frame(width: gifSize.width, height: gifSize.height)
-        VStack {
+        
+        VStack (spacing:0) {
+            Color.black
+            .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
+            .ignoresSafeArea(edges: .top)
+            
+            GIFView(gifName: "spinny.gif", size: $gifSize)
+                .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.5)
+                .background(Color.black)
+                .ignoresSafeArea(edges: [.top, .horizontal])
+            
+            Spacer()
+                .frame(maxHeight: .infinity)
+                .background(Color.black)
+            
             Image(systemName: "globe")
                 .imageScale(.small)
                 .foregroundStyle(.tint)
@@ -49,8 +61,9 @@ struct ContentView: View {
             .onAppear {
                 setupAudioPlayer()
             }
+            .padding(.bottom, 30)
         }
-        .padding()
+//        .padding()
 
         
     }
@@ -83,7 +96,7 @@ struct GIFView: UIViewRepresentable {
         guard let gif = try? UIImage(gifName: gifName) else {
             return UIImageView()
         }
-        let imageView = UIImageView(gifImage: gif, loopCount: 12)
+        let imageView = UIImageView(gifImage: gif, loopCount: 120)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }

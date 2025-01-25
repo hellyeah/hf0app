@@ -151,12 +151,12 @@ struct GIFView: UIViewRepresentable {
 struct AudioTileView: View {
     let title: String
     let action: () -> Void
+    @State private var gifSize = CGSize(width: 100, height: 100)
     
     var body: some View {
         Button(action: action) {
             VStack {
-                Rectangle()
-                    .fill(Color.gray)
+                GIFView(gifName: "spinny.gif", size: $gifSize)
                     .frame(width: 100, height: 100)
                     .cornerRadius(8)
                 

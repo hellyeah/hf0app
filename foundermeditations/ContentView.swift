@@ -140,7 +140,7 @@ struct GIFView: UIViewRepresentable {
         guard let gif = try? UIImage(gifName: gifName) else {
             return UIImageView()
         }
-        let imageView = UIImageView(gifImage: gif, loopCount: 120)
+        let imageView = UIImageView(gifImage: gif, loopCount: 120000)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }

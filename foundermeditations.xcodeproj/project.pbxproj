@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9F8BBF1D2D4008C200A4E3FC /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 9F8BBF1C2D4008C200A4E3FC /* SwiftyGif */; };
+		9F8BBF432D4C008E00A4E3FC /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F8BBF422D4C008E00A4E3FC /* FirebaseCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F8BBF432D4C008E00A4E3FC /* FirebaseCore in Frameworks */,
 				9F8BBF1D2D4008C200A4E3FC /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +85,7 @@
 				9F8BBEF02D40075800A4E3FC /* foundermeditations */,
 				9F8BBF012D40075900A4E3FC /* foundermeditationsTests */,
 				9F8BBF0B2D40075900A4E3FC /* foundermeditationsUITests */,
+				9F8BBF412D4C008E00A4E3FC /* Frameworks */,
 				9F8BBEEF2D40075800A4E3FC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +98,13 @@
 				9F8BBF082D40075900A4E3FC /* foundermeditationsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9F8BBF412D4C008E00A4E3FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +128,7 @@
 			name = foundermeditations;
 			packageProductDependencies = (
 				9F8BBF1C2D4008C200A4E3FC /* SwiftyGif */,
+				9F8BBF422D4C008E00A4E3FC /* FirebaseCore */,
 			);
 			productName = foundermeditations;
 			productReference = 9F8BBEEE2D40075800A4E3FC /* foundermeditations.app */;
@@ -203,6 +214,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				9F8BBF1B2D40089A00A4E3FC /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				9F8BBF402D4BFFDB00A4E3FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9F8BBEEF2D40075800A4E3FC /* Products */;
@@ -403,7 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"foundermeditations/Preview Content\"";
 				DEVELOPMENT_TEAM = BBQK7AXS39;
 				ENABLE_PREVIEWS = YES;
@@ -433,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"foundermeditations/Preview Content\"";
 				DEVELOPMENT_TEAM = BBQK7AXS39;
 				ENABLE_PREVIEWS = YES;
@@ -575,6 +587,14 @@
 				minimumVersion = 5.4.5;
 			};
 		};
+		9F8BBF402D4BFFDB00A4E3FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -582,6 +602,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9F8BBF1B2D40089A00A4E3FC /* XCRemoteSwiftPackageReference "SwiftyGif" */;
 			productName = SwiftyGif;
+		};
+		9F8BBF422D4C008E00A4E3FC /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F8BBF402D4BFFDB00A4E3FC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

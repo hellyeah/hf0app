@@ -8,11 +8,28 @@
 import SwiftUI
 import SwiftyGif
 import AVFoundation
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
 
 struct ContentView: View {
     @State private var audioPlayer: AVAudioPlayer?
     @State private var gifSize = CGSize(width: 100, height: 100)
     @State private var isPlaying = false
+    // register app delegate for Firebase setup
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+//    var ref: DatabaseReference!
+//    ref = Database.database().reference()
+    
+    
     
     struct AnimatedGifView: UIViewRepresentable {
         @Binding var url: URL
@@ -29,6 +46,15 @@ struct ContentView: View {
     }
     
 
+    
+    init() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category. Error: \(error)")
+        }
+    }
     
     var body: some View {
 //        Circle()
@@ -56,9 +82,15 @@ struct ContentView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(0..<10) { index in
-                        AudioTileView(title: "Audio \(index + 1)", action: {
-                            playAudio(fileName: "audio\(index + 1)")
-                        })
+                        if index == 0 {
+                            AudioTileView(title: "50 Years", action: {
+                                playAudio(fileName: "50years")
+                            })
+                        } else {
+                            AudioTileView(title: "Audio \(index + 1)", action: {
+                                playAudio(fileName: "audio\(index + 1)")
+                            })
+                        }
                     }
                 }
                 .padding()
@@ -113,7 +145,6 @@ struct ContentView: View {
     }
     
     private func playAudio(fileName: String) {
-        // Your existing audio setup code
         isPlaying = true
         
         guard let soundURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
@@ -122,6 +153,9 @@ struct ContentView: View {
         }
         
         do {
+            // Ensure audio session is active
+            try AVAudioSession.sharedInstance().setActive(true)
+            
             audioPlayer?.stop() // Stop any currently playing audio
             audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
             audioPlayer?.prepareToPlay()

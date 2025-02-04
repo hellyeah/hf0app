@@ -64,13 +64,12 @@ struct ContentView: View {
         //bring this back in after we test audio file playing
         //GIFView(gifName: "spinny.gif")
         
-        VStack (spacing:0) {
+        VStack (spacing: 0) {
             Color.black
             .frame(height: UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
             .ignoresSafeArea(edges: .top)
             
             //this is just a temporary bandaid to push the gif down from the top
-            Spacer()
             Spacer()
             
             GIFView(gifName: "spinny.gif", size: $gifSize)
@@ -95,14 +94,12 @@ struct ContentView: View {
                 }
                 .padding()
             }
-            .background(Color.black)
             
-            Spacer()
             Spacer()
 
             ZStack {
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.black.opacity(0.8), Color.black]),
+                    gradient: Gradient(colors: [Color.black, Color.black]), 
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -119,9 +116,9 @@ struct ContentView: View {
                         .font(.system(size: 44))
                         .foregroundColor(.white)
                 }
-                .padding(.bottom, 50) // Adjust this value to move button higher
+                .padding(.bottom, 50) 
             }
-            .frame(height: UIScreen.main.bounds.height * 0.2) // Increase gradient height
+            .frame(height: UIScreen.main.bounds.height * 0.2) 
         }
         .background(Color.black)
         .ignoresSafeArea()

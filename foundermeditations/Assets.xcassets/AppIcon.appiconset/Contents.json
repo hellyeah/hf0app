@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "hf0_sphere_still_1024.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
